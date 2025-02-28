@@ -111,7 +111,7 @@ export class LoginComponent implements OnInit {
               debugger;
               if(res.token){
                 debugger;
-                this.router.navigate(['/home'] );
+                this.router.navigate(['/dashboard'] );
                 // if(res.resultCode == 205){
                 //   Swal.fire('Thông báo', 'Vui lòng đổi mật khẩu lần đầu đăng nhập.', 'error');
                 //   this.router.navigate(['/changepassword'] );
