@@ -1,0 +1,96 @@
+<div class="account-pages my-5 pt-sm-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-md-8 col-lg-6 col-xl-5">
+        <div class="card overflow-hidden">
+          <div class="bg-soft bg-primary">
+            <div class="row">
+              <div class="col-7">
+                <div class="text-primary p-4">
+                  <h5 class="text-primary">MIKITECH </h5><br><h5 class="text-primary" style="margin-top: -18px;">Automation Solutions</h5>
+                </div>
+              </div>
+              <div class="col-5 align-self-end">
+                <img src="assets/images/profile-img.png" alt="" class="img-fluid">
+              </div>
+            </div>
+          </div>
+          <div class="card-body pt-0">
+            <div>
+              <a routerLink="/">
+                <div class="avatar-md profile-user-wid mb-4">
+                  <span class="avatar-title rounded-circle bg-light">
+                    <img src="assets/images/users/image-app.png" alt="" class="rounded-circle" height="34">
+                  </span>
+                </div>
+              </a>
+            </div>
+            <div class="p-2">
+              <form class="form-horizontal" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+
+                <ngb-alert type="danger" *ngIf="error" [dismissible]="false">{{ error }}</ngb-alert>
+
+                <div class="mb-3">
+                  <label for="email">Tên đăng nhập</label>
+                  <input type="text" formControlName="email" class="form-control" id="email" placeholder="Tên đăng nhập"
+                    [ngClass]="{ 'is-invalid': submitted && f.email.errors }" />
+                  <div *ngIf="submitted && f.email.errors" class="invalid-feedback">
+                    <div *ngIf="f.email.errors.required">Email đăng nhập bặt buộc nhập</div>
+                    <div *ngIf="f.email.errors.email">Email phải là địa chỉ email hợp lệ</div>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <label for="password">Mật khẩu</label>
+                  <div class="input-group auth-pass-inputgroup">
+                    <input [type]="password" class="form-control" formControlName="password" placeholder="Mật khẩu"
+                      [ngClass]="{ 'is-invalid': submitted && f.password.errors }" aria-label="Password"
+                      aria-describedby="password-addon">
+
+                    <button  (click)="ShowPass()"  class="btn btn-light ms-0" type="button" id="password-addon" ><i
+                        class="mdi mdi-eye-outline"></i></button>
+                    <div *ngIf="submitted && f.password.errors" class="invalid-feedback">
+                      <span *ngIf="f.password.errors.required">Mật khẩu bắt buộc nhập</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="mb-3">
+                  <div class="captcha-container {{ config.cssClass}}">
+                    <canvas id="captcahCanvas" width="316" height="80" style="height: 49px;width: 316px"></canvas>                  
+                    <div class="captcha-actions input-group auth-captcha-inputgroup" >
+                 
+                    <input type="text" formControlName="captch_input" class="form-control" placeholder="Enter captcha"
+                      [ngClass]="{ 'is-invalid': submitted && f.captch_input.errors }" /> 
+                      <div *ngIf="f.captch_input.errors && (f.captch_input.touched || submitted)" class="invalid-feedback">
+                        <span *ngIf="f.captch_input.errors.required">captcha bắt buộc nhập</span>
+                      </div> 
+                      <input type="button" value="Kiểm tra" (click)="checkCaptcha()" />   
+                      <a href="javascript:void(0)" class="cpt-btn reload" (click)="createCaptcha()">&#x21bb;</a>                            
+                </div>
+                </div>
+                </div>
+
+                <div class="form-check">
+                  <input class="form-check-input" type="checkbox" id="remember-check">
+                  <label class="form-check-label" for="remember-check">
+                      Ghi nhớ
+                  </label>
+              </div>
+
+                <div class="mt-3 d-grid">
+                  <button class="btn btn-primary" type="submit">ĐĂNG NHẬP</button>
+                </div>
+              </form>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- end container -->
+</div>
+<!-- end page -->

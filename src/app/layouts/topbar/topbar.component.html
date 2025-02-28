@@ -1,0 +1,125 @@
+<header id="page-topbar">
+  <div class="navbar-header">
+    <div class="d-flex">
+      <!-- LOGO -->
+      <div class="navbar-brand-box">
+        <a routerLink="/dashboard" class="logo logo-dark">
+          <span class="logo-sm">
+            <img src="assets/images/Miki_Logo.PNG" alt="" height="70">
+          </span>
+          <span class="logo-lg">
+            <img src="assets/images/Miki_Logo.PNG" alt="" height="70">
+          </span>
+        </a>
+
+        <a routerLink="/" class="logo logo-light">
+          <span class="logo-sm">
+            <img src="assets/images/Miki_Logo.PNG" alt="" height="70">
+          </span>
+          <span class="logo-lg">
+            <img src="assets/images/Miki_Logo.PNG" alt="" height="70">
+          </span>
+        </a>
+      </div>
+
+      <!-- <button type="button" class="btn btn-sm px-3 font-size-16 header-item" id="assets/images/Miki_Logo.PNG"
+        (click)="toggleMobileMenu($event)">
+        <i class="fa fa-fw fa-bars"></i>
+      </button> -->
+    </div>
+    <div style="font-size: 50px; font-weight: bold;">Crane Monitoring
+    </div>
+
+    <div class="d-flex">
+
+      <div class="dropdown d-inline-block d-lg-none ms-2" ngbDropdown>
+        <button type="button" class="btn header-item noti-icon" id="page-header-search-dropdown" data-toggle="dropdown"
+          aria-haspopup="true" ngbDropdownToggle aria-expanded="false">
+          <i class="mdi mdi-magnify"></i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-lg dropdown-menu-end p-0" ngbDropdownMenu
+          aria-labelledby="page-header-search-dropdown">
+
+          <form class="p-3">
+            <div class="m-0">
+              <div class="input-group">
+                <input type="text" class="form-control" placeholder="Search ..." aria-label="Recipient's username">
+                <div class="input-group-append">
+                  <button class="btn btn-primary" type="submit"><i class="mdi mdi-magnify"></i></button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="dropdown d-none d-lg-inline-block ms-1">
+        <button type="button" class="btn header-item noti-icon" data-toggle="fullscreen" (click)="fullscreen()">
+          <i class="bx bx-fullscreen"></i>
+        </button>
+      </div>
+
+      <div class="dropdown d-inline-block" ngbDropdown>
+        <button type="button" class="btn header-item" ngbDropdownToggle id="page-header-user-dropdown">
+          <img class="rounded-circle header-profile-user" src="assets/images/users/image-app.png" alt="Header Avatar">
+          <span class="d-none d-xl-inline-block ms-1" style="font-size: 18px;">{{userName}}</span>
+          <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
+          <!-- <a class="dropdown-item" (click)="openModal()" href="javascript: void(0);"><i
+            class="bx bx-key font-size-16 align-middle me-1"></i>
+          Đổi mật khẩu</a> -->
+        <a class="dropdown-item text-danger" href="javascript: void(0);" (click)="logout()"><i
+            class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i>
+          Logout</a>
+        </div>
+      </div>
+
+      <div class="dropdown d-inline-block">
+        <button type="button" class="btn header-item noti-icon right-bar-toggle" (click)="toggleRightSidebar()">
+          <i class="bx bx-cog bx-spin"></i>
+        </button>
+      </div>
+
+    </div>
+  </div>
+</header>
+
+<ng-template #content let-modal>
+  <div class="modal-header border-bottom-0">
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"> </button>
+  </div>
+  <div class="modal-body">
+    <div class="text-center mb-4">
+      <div class="row justify-content-center">
+        <div class="col-xl-10">
+          <h4 class="text-primary">Thay đổi mật khẩu</h4>
+          <p style="color: red;"><strong>(Mật khẩu có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt)</strong></p>
+          <form  novalidate="" class="form" [formGroup]="formGroup">
+            <div class="mb-3 row">
+              <label for="example-text-input" class="col-form-label">Mật khẩu cũ</label>
+              <div class="col-md-12">
+                <input class="form-control" type="password" formControlName="CurrentPassword" name="CurrentPassword" placeholder="Mật khẩu cũ" required>
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="example-text-input" class="col-form-label">Mật khẩu mới</label>
+              <div class="col-md-12">
+                <input class="form-control" type="password" formControlName="Password" name="Password" placeholder="Mật khẩu mới" required>
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="example-text-input" class="col-form-label">Nhập lại mật khẩu</label>
+              <div class="col-md-12">
+                <input class="form-control" type="password" formControlName="ConfirmPassword" name="ConfirmPassword" placeholder="Nhập lại mật khẩu" required>
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <button class="btn btn-primary" [disabled]="!formGroup.valid" type="button" (click)="onSubmit()">Thay đổi</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

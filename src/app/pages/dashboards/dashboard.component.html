@@ -1,0 +1,93 @@
+<div class="container-fluid">
+    <div class="dashboard-container">
+        <div class="row first-row" style="height: 50%;">
+                      <!-- Crane Information Section -->
+           <div class="crane-info">
+                <div class="crane-title">Crane Information</div>
+                <div class="crane-details">
+                    <p><strong>Name:</strong> Crane 2 Hoist</p>
+                    <p><strong>Capacity:</strong> 10 Ton</p>
+                    <p><strong>Location:</strong> Welding Fact</p>
+                    <p><strong>Customer:</strong> [Customer Name]</p>
+                </div>
+            </div>
+
+            <!-- Status Section (now to the right of Crane Information) -->
+            <div class="status-section">
+                <div class="status-box-on">
+                    <div class="status-title title">Status</div>
+                    <div class="status-value">{{ statusOnValue }}</div>
+                </div>
+                <div class="anti-sway-box">
+                    <div class="status-title title">Anti Sway</div>
+                    <div class="status-value">{{ antiSwayValue }}</div>
+                </div>
+                
+            </div>
+            <div class="total-on-info"> 
+                <div class="total-title title">Total ON time</div>
+                <div class="total-box-ontime">                    
+                    <div class="total-value">{{ totalOnTime }}</div>
+                </div>                    
+            </div>
+            <div class="braking-box-on-info">
+                <div class="total-title title">Braking ON</div> 
+                <div class="braking-box-on">                    
+                    <div class="total-value">{{ brakingOnValue }}</div>
+                </div>
+            </div>
+            
+
+            <!-- Total ON Time Section -->
+            <div class="total-on-time-section">            
+                <div class="total-box">
+                    <div class="total-title title">Total Running time / month (h)</div>
+                    <div class="total-value">
+                        Hoist: {{ hoistTime }}<br>
+                        Trolley: {{ trolleyTime }}<br>
+                        Long Travel: {{ longTravelTime }}
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+        <div class="row second-row" style="height: 50%;">
+            <!-- Graphs Section -->
+            <div class="graphs">
+                <div class="graph">
+                    <h2>Hoist Loading Status (h)</h2>
+                    <canvas id="hoistLoadingChart"></canvas>
+                </div>               
+            </div>
+            <div class="graphs">                
+                <div class="graph">
+                    <h2>Crane Operation Status (h)</h2>
+                    <canvas id="craneOperationChart"></canvas>
+                </div>
+            </div>
+
+            <!-- Additional Stats Section -->
+            <div class="additional-stats">
+                <div class="total-overload-time">
+                    <h3>Total Overload Time (h)</h3>
+                    <div class="total-value">
+                        Hoist: {{ hoistOverload }}<br>
+                        Trolley: {{ trolleyOverload }}<br>
+                        Long Travel: {{ longTravelOverload }}
+                    </div>
+                </div>
+
+                <div class="total-push-pulse">
+                    <h3>Total Push Pulse (times)</h3>
+                    <div class="total-value">
+                        Hoist 1: {{ hoistPulse }}<br>
+                        Trolley 1: {{ trolleyPulse }}<br>
+                        Long Travel 1: {{ longTravelPulse }}
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        
+    </div>
+</div>

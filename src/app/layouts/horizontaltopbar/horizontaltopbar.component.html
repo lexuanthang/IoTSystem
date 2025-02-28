@@ -1,0 +1,161 @@
+<header id="page-topbar">
+  <div class="navbar-header">
+    <div class="d-flex">
+      <!-- LOGO -->
+      <div class="navbar-brand-box">
+        <a routerLink="/home" class="logo logo-dark">
+          <span class="logo-sm">
+            <img src="assets/images/Miki_Logo.PNG" alt="" height="70">
+          </span>
+          <span class="logo-lg">
+            <img src="assets/images/Miki_Logo.PNG" alt="" height="70">
+          </span>
+        </a>
+
+        <a routerLink="/" class="logo logo-light">
+          <span class="logo-sm">
+            <img src="assets/images/Miki_Logo.PNG" alt="" height="70">
+          </span>
+          <span class="logo-lg">
+            <img src="assets/images/Miki_Logo.PNG" alt="" height="70">
+          </span>
+        </a>
+      </div>
+
+      <button type="button" class="btn btn-sm px-3 font-size-16 d-lg-none header-item" (click)="toggleMenubar()">
+        <i class="fa fa-fw fa-bars"></i>
+      </button>
+      <ng-container *ngFor="let item of menuItems">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle arrow-none" *ngIf="!item.subItems" href="javascript: void(0);"
+            id="topnav-components" [routerLink]="item.link" role="button">
+            <i class="bx {{item.icon}} me-2"></i>{{ item.label | translate }} <div class="arrow-down"
+              *ngIf="hasItems(item)"></div>
+          </a>
+
+          <a *ngIf="item.subItems" class="nav-link dropdown-toggle arrow-none" (click)="onMenuClick($event)"
+            href="javascript: void(0);" id="topnav-components" role="button">
+            <i class="bx {{item.icon}} me-1"></i>
+            {{item.label| translate }}
+            <div class="arrow-down"></div>
+          </a>
+
+          <div class="dropdown-menu" [ngClass]="{'dropdown-mega-menu-xl px-2':  item.subItems.length > 11}"
+            aria-labelledby="topnav-dashboard" *ngIf="hasItems(item)">
+            <ng-template ngFor let-i="index" let-subitem [ngForOf]="item.subItems">
+              <a *ngIf="item.subItems.length < 11 && !hasItems(subitem)" class="col dropdown-item side-nav-link-ref"
+                [routerLink]="subitem.link" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">
+                {{subitem.label | translate }}
+              </a>
+              <div *ngIf="item.subItems.length > 11">
+                <div *ngIf="i % 3 == 0" class="row">
+                  <div class="col-lg-4"><a class="dropdown-item side-nav-link-ref" routerLinkActive="active"
+                      [routerLink]="subitem.link">{{item.subItems[i].label | translate}}</a></div>
+                  <div class="col-lg-4"><a class="dropdown-item side-nav-link-ref" routerLinkActive="active"
+                      [routerLink]="item.subItems[i + 1]?.link">{{item.subItems[i + 1]?.label | translate}}</a></div>
+                  <div class="col-lg-4"><a class="dropdown-item side-nav-link-ref" routerLinkActive="active"
+                      [routerLink]="item.subItems[i + 2]?.link">{{item.subItems[i + 2]?.label | translate}}</a></div>
+                </div>
+              </div>
+
+              <div class="dropdown" *ngIf="hasItems(subitem)">
+                <a class="dropdown-item dropdown-toggle" href="javascript: void(0);" (click)="onMenuClick($event)">{{
+                  subitem.label | translate }}
+                  <div class="arrow-down"></div>
+                </a>
+                <div class="dropdown-menu">
+                  <ng-template ngFor let-subSubitem [ngForOf]="subitem.subItems">
+                    <a class="dropdown-item side-nav-link-ref" *ngIf="!hasItems(subSubitem)" href="javascript: void(0);"
+                      [routerLink]="subSubitem.link" routerLinkActive="active">{{ subSubitem.label | translate }}</a>
+                    <div class="dropdown" *ngIf="hasItems(subSubitem)">
+
+                      <a class="dropdown-item dropdown-toggle" href="javascript: void(0);"
+                        (click)="onMenuClick($event)">{{ subSubitem.label | translate }}
+                        <div class="arrow-down"></div>
+                      </a>
+                      <div class="dropdown-menu">
+                        <ng-template ngFor let-subSubSubitem [ngForOf]="subSubitem.subItems">
+                          <a class="dropdown-item side-nav-link-ref" href="javascript: void(0);"
+                            [routerLink]="subSubSubitem.link" routerLinkActive="active">{{ subSubSubitem.label |
+                            translate }}</a>
+                        </ng-template>
+                      </div>
+                    </div>
+                  </ng-template>
+                </div>
+              </div>
+            </ng-template>
+          </div>
+        </li>
+      </ng-container>
+    </div>
+
+    <div class="d-flex">
+
+      <div class="dropdown d-inline-block" ngbDropdown>
+        <button type="button" class="btn header-item" id="page-header-user-dropdown" ngbDropdownToggle>
+          <img class="rounded-circle header-profile-user" src="assets/images/users/image-app.png" alt="Header Avatar">
+          <span class="d-none d-xl-inline-block ms-1">{{userName}}</span>
+          <i class="mdi mdi-chevron-down d-none d-xl-inline-block"></i>
+        </button>
+        <div class="dropdown-menu dropdown-menu-end" ngbDropdownMenu>
+          <!-- item-->
+          <a class="dropdown-item" (click)="openModal()" href="javascript: void(0);"><i
+              class="bx bx-key font-size-16 align-middle me-1"></i>
+            Đổi mật khẩu</a>
+          <a class="dropdown-item text-danger" href="javascript: void(0);" (click)="logout()"><i
+              class="bx bx-power-off font-size-16 align-middle me-1 text-danger"></i>
+            Đăng xuất</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<div class="topnav">
+  <div class="container-fluid">
+    <nav class="navbar navbar-light navbar-expand-lg topnav-menu active">
+      <div class="collapse navbar-collapse active" id="topnav-menu-content">
+        <ul class="navbar-nav">
+
+        </ul>
+      </div>
+    </nav>
+  </div>
+</div>
+<ng-template #content let-modal>
+  <div class="modal-header border-bottom-0">
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"> </button>
+  </div>
+  <div class="modal-body">
+    <div class="text-center mb-4">
+      <div class="row justify-content-center">
+        <div class="col-xl-10">
+          <h4 class="text-primary">Thay đổi mật khẩu</h4>
+          <form>
+            <div class="mb-3 row">
+              <label for="example-text-input" class="col-form-label">Mật khẩu cũ</label>
+              <div class="col-md-12">
+                <input class="form-control" type="password" [(ngModel)]="passModel.CurrentPassword" name="CurrentPassword" placeholder="Mật khẩu cũ" required>
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="example-text-input" class="col-form-label">Mật khẩu mới</label>
+              <div class="col-md-12">
+                <input class="form-control" type="password" [(ngModel)]="passModel.Password" name="Password" placeholder="Mật khẩu mới" required>
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <label for="example-text-input" class="col-form-label">Nhập lại mật khẩu</label>
+              <div class="col-md-12">
+                <input class="form-control" type="password" [(ngModel)]="passModel.ConfirmPassword" name="ConfirmPassword" placeholder="Nhập lại mật khẩu" required>
+              </div>
+            </div>
+            <div class="mb-3 row">
+              <button class="btn btn-primary" type="button" (click)="onSubmit()">Thay đổi</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>
