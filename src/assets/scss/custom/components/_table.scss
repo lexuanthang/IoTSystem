@@ -24,7 +24,7 @@
 }
 
 
-.table-dark>:not(:last-child)>:last-child>*{
+::ng-deep .table-dark>:not(:last-child)>:last-child>*{
   border-bottom-color:  $table-dark-border-color;
 }
 

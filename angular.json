@@ -18,7 +18,7 @@
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
             "allowedCommonJsDependencies": [
-              "rxjs", "core-js", "chart.js", "chartist"
+              "rxjs", "core-js", "chart.js", "chartist","ngx-lightbox"
             ],
             "outputPath": "dist/skote",
             "index": "src/index.html",
