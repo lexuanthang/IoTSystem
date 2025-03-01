@@ -29,6 +29,8 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
   menuItems = [];
   currentUser1: any;
   @ViewChild('sideMenu') sideMenu: ElementRef;
+  currentTime: string = '';
+  currentDate: string = '';
 
   constructor(private eventService: EventService, private router: Router,
      public translate: TranslateService, private http: HttpClient,
@@ -42,11 +44,20 @@ export class SidebarComponent implements OnInit, AfterViewInit, OnChanges {
   }
 
   ngOnInit() {
+    this.updateTime();
+    setInterval(() => this.updateTime(), 1000); // Cập nhật mỗi giây
+    this.initialize();
+    this._scrollElement();
     this.currentUser1 = this.storageService.getUser();
     this.id = JSON.parse(this.currentUser1).id;
     this.initialize();
 
     this._scrollElement();
+  }
+  updateTime(): void {
+    const now = new Date();
+    this.currentTime = now.toLocaleTimeString('en-GB', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+    this.currentDate = now.toLocaleDateString('en-GB', { day: '2-digit', month: '2-digit', year: 'numeric' });
   }
   onClick(){    
   }

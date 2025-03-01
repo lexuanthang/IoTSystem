@@ -61,5 +61,14 @@
       <ng-container *ngTemplateOutlet="contentTemplate"></ng-container>
     </div>
   </ngx-simplebar>
+  <!-- Time Display at Bottom Right -->
+  <div class="menu-footer">
+    <div class="time-display">
+      <span class="clock">{{ currentTime }}</span> <!-- Hiển thị HH:MM:SS -->
+      <br>
+      <span class="date">{{ currentDate }}</span>
+    </div>
+  </div>
+
 </div>
 <!-- Left Sidebar End -->
