@@ -189,7 +189,15 @@ export class DashboardComponent implements OnInit {
             legend: {
               position: 'bottom',
               labels: {
-                usePointStyle: true
+                usePointStyle: false, // ❌ Tắt icon hình tròn (mặc định)
+                boxWidth: 20, // 🟢 Điều chỉnh kích thước hình vuông
+                boxHeight: 20, // 🟢 Điều chỉnh kích thước chiều cao
+                padding: 10, // 🟢 Giãn khoảng cách giữa các mục
+                font: {
+                  size: 14,
+                  weight: 'bold',                  
+                },
+                color: '#fff'
               }
             },
             tooltip: {
