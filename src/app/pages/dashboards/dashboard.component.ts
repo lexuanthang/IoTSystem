@@ -1,5 +1,5 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
-import { Chart as ChartJS, registerables } from 'chart.js';
+import { Chart as ChartJS, ChartConfiguration, registerables } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 import { DataDashboard } from 'src/app/pages/models/DataDashboard.model';
@@ -16,10 +16,12 @@ export class DashboardComponent implements OnInit {
   hoistLoadingLabels: string[] = ['Light Load', 'Medium Load', 'Heavy Load'];
   hoistLoadingData: number[] = [660, 370, 103];
   hoistLoadingColors: string[] = ['#2ecc71', '#2980b9', '#e67e22'];
+  hoistLoadingChart!: ChartJS<'pie', number[], string>;
 
   craneOperationLabels: string[] = ['No Load', 'Load', 'Overload'];
   craneOperationData: number[] = [1200, 560, 100];
   craneOperationColors: string[] = ['#2ecc71', '#2980b9', '#e74c3c'];
+  craneOperationChart!: ChartJS<'pie', number[], string>;
 
   // 🟢 Khai báo biến mới từ yêu cầu của bạn
   statusOnValue: number = 1860;
@@ -57,8 +59,15 @@ export class DashboardComponent implements OnInit {
   constructor(private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
-    this.createPieChart('hoistLoadingChart', this.hoistLoadingLabels, this.hoistLoadingData, this.hoistLoadingColors);
-    this.createPieChart('craneOperationChart', this.craneOperationLabels, this.craneOperationData, this.craneOperationColors);
+    this.hoistLoadingChart = this.createPieChart('hoistLoadingChart', this.hoistLoadingLabels, this.hoistLoadingData, this.hoistLoadingColors);
+    this.craneOperationChart = this.createPieChart('craneOperationChart', this.craneOperationLabels, this.craneOperationData, this.craneOperationColors);
+
+    // 🟢 Giả lập cập nhật dữ liệu từ WebSocket sau 5 giây
+    // setTimeout(() => {
+    //   console.log("Updating chart data...");
+    //   this.updateChartData(this.hoistLoadingChart, [500, 250, 150]);
+    //   this.updateChartData(this.craneOperationChart, [800, 400, 300]);
+    // }, 1000);
 
     const token = this.getToken();
     if (token) {
@@ -143,6 +152,13 @@ export class DashboardComponent implements OnInit {
         this.trolleyPulse = telemetryData.trolleyPulse?.[0]?.["1"] ? Number(telemetryData.trolleyPulse[0]["1"]) : this.trolleyPulse;
         this.longTravelPulse = telemetryData.longTravelPulse?.[0]?.["1"] ? Number(telemetryData.longTravelPulse[0]["1"]) : this.longTravelPulse;
   
+        //Test update biểu đồ
+        this.craneOperationData = [telemetryData.craneOperationData1?.[0]?.["1"] ? Number(telemetryData.craneOperationData1[0]["1"]): 1200,
+        telemetryData.craneOperationData2?.[0]?.["1"] ? Number(telemetryData.craneOperationData2[0]["1"]): 560, 
+        telemetryData.craneOperationData3?.[0]?.["1"] ? Number(telemetryData.craneOperationData3[0]["1"]): 100];
+        console.log("Updating chart data...");
+        this.updateChartData(this.craneOperationChart, this.craneOperationData);
+
         console.log("Updated DataDashboard:", this.dataDashboard);
         console.log("Updated Other Variables:", {
           statusOnValue: this.statusOnValue,
@@ -169,61 +185,75 @@ export class DashboardComponent implements OnInit {
   }
   
 
-  createPieChart(chartId: string, labels: string[], data: number[], colors: string[]): void {
-    const ctx = document.getElementById(chartId) as HTMLCanvasElement;
-    if (ctx) {
-      new ChartJS(ctx, {  // 🟢 Sử dụng `ChartJS` thay vì `Chart`
-        type: 'pie',
-        data: {
-          labels: labels,
-          datasets: [{
-            data: data,
-            backgroundColor: colors,
-            borderColor: '#fff',
-            borderWidth: 2
-          }]
-        },
-        options: {
-          responsive: true,
-          plugins: {
-            legend: {
-              position: 'bottom',
-              labels: {
-                usePointStyle: false, // ❌ Tắt icon hình tròn (mặc định)
-                boxWidth: 20, // 🟢 Điều chỉnh kích thước hình vuông
-                boxHeight: 20, // 🟢 Điều chỉnh kích thước chiều cao
-                padding: 10, // 🟢 Giãn khoảng cách giữa các mục
-                font: {
-                  size: 14,
-                  weight: 'bold',                  
-                },
-                color: '#fff'
-              }
-            },
-            tooltip: {
-              callbacks: {
-                label: function (tooltipItem: any) {
-                  let total = tooltipItem.dataset.data.reduce((acc: number, val: number) => acc + val, 0);
-                  let value = tooltipItem.raw;
-                  let percentage = ((value / total) * 100).toFixed(1) + '%';
-                  return `${value} (${percentage})`;
-                }
-              }
-            },
-            datalabels: {
-              color: '#fff',
-              font: {
-                weight: 'bold'
-              },
-              formatter: (value: number, ctx: any) => {
-                let total = ctx.chart.data.datasets[0].data.reduce((a: number, b: number) => a + b, 0);
+  createPieChart(chartId: string, labels: string[], data: number[], colors: string[]): ChartJS<'pie', number[], string> | null {
+    const canvas = document.getElementById(chartId) as HTMLCanvasElement | null;
+    
+    if (!canvas) {
+      console.error(`Canvas với ID '${chartId}' không tìm thấy.`);
+      return null;
+    }
+  
+    const ctx = canvas.getContext('2d');
+    
+    if (!ctx) {
+      console.error(`Không thể lấy context 2D cho canvas '${chartId}'.`);
+      return null;
+    }
+  
+    return new ChartJS(ctx, {
+      type: 'pie',
+      data: {
+        labels: labels,
+        datasets: [{
+          data: data,
+          backgroundColor: colors,
+          borderColor: '#fff',
+          borderWidth: 2
+        }]
+      },
+      options: {
+        responsive: true,
+        plugins: {
+          legend: {
+            position: 'bottom',
+            labels: {
+              usePointStyle: false,
+              boxWidth: 20,
+              boxHeight: 20,
+              padding: 10,
+              font: { size: 14, weight: 'bold' },
+              color: '#fff'
+            }
+          },
+          tooltip: {
+            callbacks: {
+              label: function (tooltipItem: any) {
+                let total = tooltipItem.dataset.data.reduce((acc: number, val: number) => acc + val, 0);
+                let value = tooltipItem.raw;
                 let percentage = ((value / total) * 100).toFixed(1) + '%';
                 return `${value} (${percentage})`;
               }
             }
+          },
+          datalabels: {
+            color: '#fff',
+            font: { weight: 'bold' },
+            formatter: (value: number, ctx: any) => {
+              let total = ctx.chart.data.datasets[0].data.reduce((a: number, b: number) => a + b, 0);
+              let percentage = ((value / total) * 100).toFixed(1) + '%';
+              return `${value} (${percentage})`;
+            }
           }
         }
-      });
+      }
+    });
+  }
+  
+
+  updateChartData(chart: ChartJS<'pie', number[], string>, newData: number[]): void {
+    if (chart) {
+      chart.data.datasets[0].data = newData;
+      chart.update();
     }
   }
   
