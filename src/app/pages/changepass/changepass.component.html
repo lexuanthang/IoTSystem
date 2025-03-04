@@ -1,44 +1,49 @@
 <div class="container-fluid">
-    <div class="row">
-        <div class="col-lg-12">
-            <div class="card">
-                <div class="card-body">
-                    <h4 class="card-title">Đổi mật khẩu</h4>
-                    
-                    <div class="text-center mb-4">
-                        <div class="row justify-content-center">
-                          <div class="col-xl-10">
-                            <h4 class="text-primary">Thay đổi mật khẩu</h4>
-                            <p style="color: red;"><strong>(Mật khẩu có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt)</strong></p>
-                            <form  novalidate="" class="form" [formGroup]="formGroup">
-                              <div class="mb-3 row">
-                                <label for="example-text-input" class="col-form-label">Mật khẩu cũ</label>
-                                <div class="col-md-12">
-                                  <input class="form-control" type="password" formControlName="CurrentPassword" name="CurrentPassword" placeholder="Mật khẩu cũ" required>
-                                </div>
-                              </div>
-                              <div class="mb-3 row">
-                                <label for="example-text-input" class="col-form-label">Mật khẩu mới</label>
-                                <div class="col-md-12">
-                                  <input class="form-control" type="password" formControlName="Password" name="Password" placeholder="Mật khẩu mới" required>
-                                </div>
-                              </div>
-                              <div class="mb-3 row">
-                                <label for="example-text-input" class="col-form-label">Nhập lại mật khẩu</label>
-                                <div class="col-md-12">
-                                  <input class="form-control" type="password" formControlName="ConfirmPassword" name="ConfirmPassword" placeholder="Nhập lại mật khẩu" required>
-                                </div>
-                              </div>
-                              <div class="mb-3 row">
-                                <button class="btn btn-primary" [disabled]="!formGroup.valid" type="button" (click)="onSubmit()">Thay đổi</button>
-                              </div>
-                            </form>
-                          </div>
-                        </div>
-                      </div>
-                </div>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="card">
+        <div class="card-body">
+          <h4 class="card-title">Đổi mật khẩu</h4>
+
+          <div class="text-center mb-4">
+            <div class="row justify-content-center">
+              <div class="col-xl-10">
+                <h4 class="text-primary">Thay đổi mật khẩu</h4>
+                <p style="color: red;"><strong>(Mật khẩu có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường, số và
+                    ký tự đặc biệt)</strong></p>
+                <form novalidate="" class="form" [formGroup]="formGroup">
+                  <div class="mb-3 row">
+                    <label for="example-text-input" class="col-form-label">Mật khẩu cũ</label>
+                    <div class="col-md-12">
+                      <input class="form-control" type="password" formControlName="CurrentPassword"
+                        name="CurrentPassword" placeholder="Mật khẩu cũ" required>
+                    </div>
+                  </div>
+                  <div class="mb-3 row">
+                    <label for="example-text-input" class="col-form-label">Mật khẩu mới</label>
+                    <div class="col-md-12">
+                      <input class="form-control" type="password" formControlName="Password" name="Password"
+                        placeholder="Mật khẩu mới" required>
+                    </div>
+                  </div>
+                  <div class="mb-3 row">
+                    <label for="example-text-input" class="col-form-label">Nhập lại mật khẩu</label>
+                    <div class="col-md-12">
+                      <input class="form-control" type="password" formControlName="ConfirmPassword"
+                        name="ConfirmPassword" placeholder="Nhập lại mật khẩu" required>
+                    </div>
+                  </div>
+                  <div class="mb-3 row">
+                    <button class="btn btn-primary" [disabled]="!formGroup.valid" type="button"
+                      (click)="onSubmit()">Thay đổi</button>
+                  </div>
+                </form>
+              </div>
             </div>
+          </div>
         </div>
+      </div>
     </div>
-    <!-- end row -->
+  </div>
+  <!-- end row -->
 </div>
