@@ -331,6 +331,50 @@ canvas {
     color: white !important;
 }
 
+/* Chart Legend Styles */
+::ng-deep {
+    .chart-legend {
+        display: flex !important;
+        justify-content: center !important;
+        margin-top: 10px !important;
+    }
+
+    .legend-labels {
+        display: flex !important;
+        flex-direction: row !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 20px !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        list-style: none !important;
+        flex-wrap: nowrap !important;
+        width: auto !important;
+    }
+
+    .legend-label {
+        display: inline-flex !important;
+        align-items: center !important;
+        margin: 0 !important;
+        padding: 0 !important;
+        white-space: nowrap !important;
+        font-size: 14px !important;
+        position: static !important;
+        float: none !important;
+        min-width: auto !important;
+    }
+
+    .legend-label-color {
+        margin-right: 5px !important;
+    }
+
+    li.legend-label {
+        position: static !important;
+        transform: none !important;
+        float: none !important;
+    }
+}
+
 /* Heading Colors */
 .h1, .h2, .h3, .h4, .h5, .h6, h1, h2, h3, h4, h5, h6 {
     color: white;

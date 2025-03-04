@@ -208,7 +208,7 @@ export class DashboardComponent implements OnInit {
           data: data,
           backgroundColor: colors,
           borderColor: '#fff',
-          borderWidth: 2
+          borderWidth: 1
         }]
       },
       options: {
@@ -218,10 +218,10 @@ export class DashboardComponent implements OnInit {
             position: 'bottom',
             labels: {
               usePointStyle: false,
-              boxWidth: 20,
-              boxHeight: 20,
-              padding: 10,
-              font: { size: 14, weight: 'bold' },
+              boxWidth: 15,
+              boxHeight: 15,
+              padding: 6,
+              font: { size: 13, weight: 'bold' },
               color: '#fff'
             }
           },
