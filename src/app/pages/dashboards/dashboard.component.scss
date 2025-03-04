@@ -60,16 +60,16 @@
     display: flex;
     justify-content: space-between;
     width: 100%;
-    gap: 20px;
+    gap: 15px; /* Reduced gap */
     
     &:first-child {
-        height: 180px;
-        min-height: 180px;
+        height: 160px; /* Reduced height */
+        min-height: 160px;
     }
     
     &:last-child {
-        height: 420px; /* Increased height for second row */
-        min-height: 420px;
+        height: 445px; /* Adjusted height */
+        min-height: 445px;
     }
 }
 
@@ -82,7 +82,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    min-height: 246px;
+    min-height: 279px;
 
     .crane-details {
         flex: 1;
@@ -163,7 +163,7 @@
     background-color: #2a3942;
     padding: 10px;
     height: 100%;
-    min-height: 246px;
+    min-height: 279px;
 }
 
 .status-box-on,
@@ -189,7 +189,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    min-height: 246px;
+    min-height: 279px;
 }
 
 .total-box-ontime,
@@ -209,7 +209,7 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    min-height: 246px;
+    min-height: 279px;
 
     .total-box {
         height: 100%;
@@ -266,7 +266,7 @@
     border: 2px solid #00CCFF;
     padding: 15px;
     background-color: #2a3942;
-    height: 116%;
+    height: 100%; /* Changed from 116% to 100% */
     display: flex;
     flex-direction: column;
 
@@ -277,27 +277,27 @@
         align-items: center;
         
         h2 {
-            margin-bottom: 15px;
+            margin-bottom: 10px; /* Reduced margin */
             flex-shrink: 0;
             width: 100%;
         }
 
         canvas {
-            width: 380px !important;
-            height: 380px !important;
+            width: 340px !important; /* Reduced size */
+            height: 340px !important;
             max-width: 100%;
             margin: auto;
         }
     }
 }
 
-/* Additional Stats Section - Adjust heights to match new row height */
+/* Additional Stats Section */
 .additional-stats {
     width: 25%;
     display: flex;
     flex-direction: column;
     gap: 15px;
-    height: 116%;
+    height: 100%; /* Changed from 116% to 100% */
 
     .total-overload-time,
     .total-push-pulse {
@@ -307,18 +307,13 @@
         height: calc(50% - 7.5px);
         display: flex;
         flex-direction: column;
-
-        .time-row-container {
-            margin-top: 10px;
-            height: calc(100% - 42px); /* Adjust for increased container height */
-        }
     }
 }
 
 /* Common Value Styles */
 .status-value,
 .total-value {
-    font-size: 20px;
+    font-size: 30px;
     font-weight: bold;
     text-align: center;
     color: white;
@@ -347,21 +342,77 @@ canvas {
         margin-left: 0;
         height: auto;
         overflow: auto;
+        padding: 15px; /* Reduced padding */
     }
     
     .row {
-        flex-wrap: wrap;
-        gap: 20px;
+        flex-wrap: nowrap; /* Changed from wrap to nowrap */
+        gap: 15px;
+        
+        &:first-child {
+            height: 160px;
+            min-height: 160px;
+        }
+        
+        &:last-child {
+            height: 380px;
+            min-height: 380px;
+        }
     }
     
-    .crane-info,
-    .status-section,
+    .crane-info {
+        width: 25%;
+        min-height: 160px;
+    }
+    
+    .status-section {
+        width: 15%;
+        min-height: 160px;
+    }
+    
     .total-on-info,
-    .braking-box-on-info,
-    .total-on-time-section,
-    .graphs,
+    .braking-box-on-info {
+        width: 15%;
+        min-height: 160px;
+    }
+    
+    .total-on-time-section {
+        width: 25%;
+        min-height: 160px;
+    }
+    
+    .graphs {
+        width: 36%;
+        height: 100%;
+        
+        canvas {
+            width: 320px !important;
+            height: 320px !important;
+        }
+    }
+    
     .additional-stats {
-        width: 100%;
+        width: 25%;
+        height: 100%;
+    }
+}
+
+/* Add new media query for smaller screens */
+@media (max-width: 1200px) {
+    .graphs canvas {
+        width: 300px !important;
+        height: 300px !important;
+    }
+    
+    .info-row {
+        .label, .value {
+            font-size: 16px; /* Reduced font size */
+        }
+    }
+    
+    .status-value,
+    .total-value {
+        font-size: 18px;
     }
 }
 

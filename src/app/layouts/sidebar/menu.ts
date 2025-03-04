@@ -12,13 +12,13 @@ export const MENU: MenuItem[] = [
         id: 2,
         label: 'Data Record',
         icon: 'bx bxs-briefcase-alt',
-        link: '/tenant'
+        link: '/data-record'
     },
     {
         id: 3,
         label: 'Management',
         icon: 'bx bx-notepad',
-        link: '/reportquantity'
+        link: '/management'
     },
        
     {
