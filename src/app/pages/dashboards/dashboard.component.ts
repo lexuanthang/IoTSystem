@@ -237,7 +237,10 @@ export class DashboardComponent implements OnInit {
           },
           datalabels: {
             color: '#fff',
-            font: { weight: 'bold' },
+            font: { 
+              weight: 'bold',
+              size: 18
+            },
             formatter: (value: number, ctx: any) => {
               let total = ctx.chart.data.datasets[0].data.reduce((a: number, b: number) => a + b, 0);
               let percentage = ((value / total) * 100).toFixed(1) + '%';

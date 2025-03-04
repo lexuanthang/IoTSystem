@@ -13,7 +13,7 @@
         <div class="row">
             <!-- Crane Information Section -->
             <div class="crane-info">
-                <div class="crane-title">Crane Information</div>
+                <div class="crane-title title">Crane Information</div>
                 <div class="crane-details">
                     <div class="info-row dark">
                         <span class="label">Name:</span>
@@ -50,7 +50,7 @@
             <div class="total-on-info">
                 <div class="total-title title">Total ON time</div>
                 <div class="total-box-ontime">
-                    <div class="total-value">{{ totalOnTime }}</div>
+                    <div class="total-value" style="font-size: 54px;">{{ totalOnTime }}</div>
                 </div>
             </div>
 
@@ -58,7 +58,7 @@
             <div class="braking-box-on-info">
                 <div class="total-title title">Braking ON</div>
                 <div class="braking-box-on">
-                    <div class="total-value">{{ brakingOnValue }}</div>
+                    <div class="total-value" style="font-size: 54px;">{{ brakingOnValue }}</div>
                 </div>
             </div>
 
@@ -87,14 +87,14 @@
         <div class="row">
             <!-- Graphs Section -->
             <div class="graphs">
-                <div class="graph">
+                <div class="graph title">
                     <h2>Hoist Loading Status (h)</h2>
                     <canvas id="hoistLoadingChart"></canvas>
                 </div>
             </div>
 
             <div class="graphs" style="margin-left: 10px;">
-                <div class="graph">
+                <div class="graph title">
                     <h2>Crane Operation Status (h)</h2>
                     <canvas id="craneOperationChart"></canvas>
                 </div>
@@ -103,7 +103,7 @@
             <!-- Additional Stats Section -->
             <div class="additional-stats">
                 <div class="total-overload-time" style="margin-left: -10px; width: 105%;">
-                    <h3>Total Overload Time (h)</h3>
+                    <h3 class="title">Total Overload Time (h)</h3>
                     <div class="time-row-container">
                         <div class="time-row dark">
                             <span class="label">Hoist:</span>
@@ -121,7 +121,7 @@
                 </div>
 
                 <div class="total-push-pulse" style="margin-left: -10px; width: 105%;">
-                    <h3>Total Push Pulse (times)</h3>
+                    <h3 class="title">Total Push Pulse (times)</h3>
                     <div class="time-row-container">
                         <div class="time-row dark">
                             <span class="label">Hoist 1:</span>
