@@ -10,6 +10,9 @@
     margin-left: 0; /* Remove left margin */
     display: flex;
     flex-direction: column;
+    position: relative; /* Add position relative */
+    z-index: 1; /* Ensure proper stacking */
+    margin-top: 60px; /* Add margin to prevent overlay */
 }
 
 .dashboard-container {
@@ -34,6 +37,8 @@
     flex-shrink: 0;
     margin-left: -12px;
     text-align: center;
+    position: relative;
+    z-index: 2;
 }
 
 /* Common Title Styles */
@@ -359,8 +364,8 @@ canvas {
         background: #2a3942;
         border-right: 2px solid #00CCFF;
         z-index: 1000;
-        padding-top: 20px;
-
+        padding-top: 80px; /* Increase padding-top */
+        
         .menu-item {
             padding: 12px 20px;
             color: white;
@@ -373,5 +378,15 @@ canvas {
                 color: #00CCFF;
             }
         }
+    }
+}
+
+/* Add styles for page-content */
+:host ::ng-deep {
+    .page-content {
+        position: relative;
+        z-index: 0;
+        margin-top: 0;
+        padding-top: 0;
     }
 }
