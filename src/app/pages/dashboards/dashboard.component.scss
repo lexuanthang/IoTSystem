@@ -12,7 +12,8 @@
     flex-direction: column;
     position: relative; /* Add position relative */
     z-index: 2; /* Ensure proper stacking */
-    margin-top: 60px; /* Add margin to prevent overlay */
+    //margin-top: 60px; /* Add margin to prevent overlay */
+    margin-top: -10px; /* Add margin to prevent overlay */
 }
 
 .dashboard-container {
