@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
   craneOperationChart!: ChartJS<'pie', number[], string>;
 
   // 🟢 Khai báo biến mới từ yêu cầu của bạn
-  statusOnValue: number = 1860;
+  statusOnValue: string = "ON";
   antiSwayValue: string = "ON";
   brakingOnValue: number = 699;
   totalOnTime: number = 1860;
@@ -138,19 +138,19 @@ export class DashboardComponent implements OnInit {
         });
   
         // 🔹 Cập nhật các giá trị khác (ngoài dataDashboard)
-        this.statusOnValue = telemetryData.statusOnValue?.[0]?.["1"] ? Number(telemetryData.statusOnValue[0]["1"]) : this.statusOnValue;
+        this.statusOnValue = telemetryData.statusOnValue?.[0]?.["1"] || this.statusOnValue;
         this.antiSwayValue = telemetryData.antiSwayValue?.[0]?.["1"] || this.antiSwayValue;
         this.brakingOnValue = telemetryData.backtrackingCount?.[0]?.["1"] ? Number(telemetryData.backtrackingCount[0]["1"]) : this.dataDashboard.backtrackingCount;
         this.totalOnTime = telemetryData.totalOnTime?.[0]?.["1"] ? Number(telemetryData.totalOnTime[0]["1"]) : this.totalOnTime;
-        this.hoistTime = telemetryData.hoistTime?.[0]?.["1"] ? Number(telemetryData.hoistTime[0]["1"]) : this.hoistTime;
-        this.trolleyTime = telemetryData.trolleyTime?.[0]?.["1"] ? Number(telemetryData.trolleyTime[0]["1"]) : this.trolleyTime;
-        this.longTravelTime = telemetryData.longTravelTime?.[0]?.["1"] ? Number(telemetryData.longTravelTime[0]["1"]) : this.longTravelTime;
-        this.hoistOverload = telemetryData.hoistOverload?.[0]?.["1"] ? Number(telemetryData.hoistOverload[0]["1"]) : this.hoistOverload;
-        this.trolleyOverload = telemetryData.trolleyOverload?.[0]?.["1"] ? Number(telemetryData.trolleyOverload[0]["1"]) : this.trolleyOverload;
-        this.longTravelOverload = telemetryData.longTravelOverload?.[0]?.["1"] ? Number(telemetryData.longTravelOverload[0]["1"]) : this.longTravelOverload;
-        this.hoistPulse = telemetryData.hoistPulse?.[0]?.["1"] ? Number(telemetryData.hoistPulse[0]["1"]) : this.hoistPulse;
-        this.trolleyPulse = telemetryData.trolleyPulse?.[0]?.["1"] ? Number(telemetryData.trolleyPulse[0]["1"]) : this.trolleyPulse;
-        this.longTravelPulse = telemetryData.longTravelPulse?.[0]?.["1"] ? Number(telemetryData.longTravelPulse[0]["1"]) : this.longTravelPulse;
+        this.hoistTime = telemetryData.runTime1?.[0]?.["1"] ? Number(telemetryData.runTime1[0]["1"]) : this.hoistTime;
+        this.trolleyTime = telemetryData.runTime2?.[0]?.["1"] ? Number(telemetryData.runTime2[0]["1"]) : this.trolleyTime;
+        this.longTravelTime = telemetryData.runTime3?.[0]?.["1"] ? Number(telemetryData.runTime3[0]["1"]) : this.longTravelTime;
+        this.hoistOverload = telemetryData.overloadTime1?.[0]?.["1"] ? Number(telemetryData.overloadTime1[0]["1"]) : this.hoistOverload;
+        this.trolleyOverload = telemetryData.overloadTime2?.[0]?.["1"] ? Number(telemetryData.overloadTime2[0]["1"]) : this.trolleyOverload;
+        this.longTravelOverload = telemetryData.overloadTime3?.[0]?.["1"] ? Number(telemetryData.overloadTime3[0]["1"]) : this.longTravelOverload;
+        this.hoistPulse = telemetryData.pushpulseCount1?.[0]?.["1"] ? Number(telemetryData.pushpulseCount1[0]["1"]) : this.hoistPulse;
+        this.trolleyPulse = telemetryData.pushpulseCount2?.[0]?.["1"] ? Number(telemetryData.pushpulseCount2[0]["1"]) : this.trolleyPulse;
+        this.longTravelPulse = telemetryData.pushpulseCount3?.[0]?.["1"] ? Number(telemetryData.pushpulseCount3[0]["1"]) : this.longTravelPulse;
   
         //Test update biểu đồ
         this.craneOperationData = [telemetryData.craneOperationData1?.[0]?.["1"] ? Number(telemetryData.craneOperationData1[0]["1"]): 1200,
